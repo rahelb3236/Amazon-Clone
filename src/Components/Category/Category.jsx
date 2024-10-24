@@ -13,11 +13,6 @@ CategoryInfos.map((infos,index) =>(
 ))
 }
 </section>
-
-
-
-
-
     </div>
   )
 }

@@ -7,7 +7,9 @@ import { DataContext } from '../DataProvider/DataProvider'
 import {Type} from '../../Utility/action.type'
 
 
-function ProductCard( {product,flex,renderDescription,renderAdd}) {
+function ProductCard( 
+  {product,flex,renderDesc, renderAdd}) {
+ 
   const {image, title, id, rating, price, description }= product;
  
   const [state,dispatch]=useContext(DataContext)
@@ -25,25 +27,21 @@ function ProductCard( {product,flex,renderDescription,renderAdd}) {
 
   return (
     <>
-      <div
-        className={`${classes.card_container}`}
-      >
+      <div  className={`${classes.card_container} ${flex?classes.product_flexed : ''}`}>
         <Link to={`/products/${id}`}>
           <img src={image}alt="" className={classes.img_container}/>
         </Link>
         <div>
           <h3 className="">{title}</h3>
-          {renderDescription && (
-            <div>
-              <p className="">{description}</p>
-            </div>
-          )}
-          <div>
+          {renderDesc && <div style={{maxWidth:"750px"}}>{description}</div>}
+        
+            
+          <div className={classes.rating}>
             <Rating value={rating?.rate}precision={0.1}/>
             {/* rating count */}
             <small>{rating?.count}</small>
           </div>
-          <div className="">
+          <div >
             <CurrencyFormat amount={price}/>
           </div>
           {renderAdd && <button className={`${classes.button}`} onClick={addToCart}>add to cart</button>}
